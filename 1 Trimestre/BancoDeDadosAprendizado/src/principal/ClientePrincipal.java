@@ -1,10 +1,14 @@
 package principal;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
+
+
 import conexao.Conexao;
-import dao.DAO_Cliente;
+import dao.DAOCliente;
 import entidade.Cliente;
 
 
@@ -13,7 +17,7 @@ public class ClientePrincipal {
 		int option = 0;
 		Scanner scan = new Scanner(System.in);
 		Cliente cliente = new Cliente();
-		DAO_Cliente dao = new DAO_Cliente();
+		DAOCliente dao = new DAOCliente();
 		
 		
 		try {
@@ -24,6 +28,7 @@ public class ClientePrincipal {
 					+ "3 - alterar\n"
 					+ "4 - consultar\n"
 					+ "5 - sair");
+			//data transfer objeto
 			
 			option = scan.nextInt();
 			scan.nextLine();
@@ -40,10 +45,10 @@ public class ClientePrincipal {
 				dao.inserir(cliente);
 			
 			}else if(option == 2) {
-				ResultSet rs = dao.consultar();
-				while(rs.next()) {
-					System.out.println(rs.getString("id")+"-"+rs.getString("nome"));						
-				}
+//				ResultSet rs = dao.consultar();
+//				while(rs.next()) {
+//					System.out.println(rs.getString("id")+"-"+rs.getString("nome"));						
+//				}
 				System.out.println("Informe o ID a ser excluído: ");
 				String codigo = scan.nextLine();
 				cliente.setId(codigo);
@@ -63,10 +68,13 @@ public class ClientePrincipal {
 				dao.alterar(cliente);
 				
 			}else if(option == 4) {
-				ResultSet rs = dao.consultar();
-				while(rs.next()) {
-					System.out.println(rs.getString("ID")+"-"+rs.getString("NOME"));
-				}
+				
+				//falta percorrer a lista do consultar
+				List<Cliente> dados = new ArrayList<Cliente>();
+				dados = dao.consultar();
+				
+				System.out.println(dados[0]);
+
 			}
 			
 			

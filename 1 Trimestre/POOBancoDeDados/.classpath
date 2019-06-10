@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="OrientadaObjetos/src"/>
+	<classpathentry kind="src" path="testeBiblioteca/src"/>
+	<classpathentry kind="lib" path="testeBiblioteca/WebContent/WEB-INF/lib/mysql-connector-java-8.0.13.jar"/>
+	<classpathentry kind="lib" path="testeBiblioteca/WebContent/WEB-INF/lib/teste.jar"/>
+	<classpathentry kind="output" path="OrientadaObjetos/build/classes"/>
+</classpath>

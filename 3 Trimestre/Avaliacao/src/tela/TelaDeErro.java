@@ -47,7 +47,7 @@ public void run()
 
 public void Testando(){
 	JFrame janela = new JFrame("Tela de Erro");
-	TelaDeErro panel = new TelaDeErro("VOCÊ ERROU!");
+	TelaDeErro panel = new TelaDeErro("Parabéns, Você Ganhou, Até mais!");
 	
 	janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	janela.getContentPane().add(panel);
@@ -57,8 +57,8 @@ public void Testando(){
 	Thread thread = new Thread(panel);
 	thread.start();
 	
-	int delay = 1000;   // tempo de espera antes da 1ª execução da tarefa.
-	int interval = 3000;
+	int delay = 3000;   // tempo de espera antes da 1ª execução da tarefa.
+	int interval = 6000;
 	// intervalo no qual a tarefa será executada.
 	Timer timer = new Timer();
 	timer.scheduleAtFixedRate(new TimerTask() {

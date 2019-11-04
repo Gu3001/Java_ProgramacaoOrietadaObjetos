@@ -45,9 +45,10 @@ public class JogoMemoria extends JInternalFrame{//colocar internalFrame
 			panel.add(Escolha[i]);
 			Escolha[i].setFont(fonte);
 			Escolha[i].setVisible(true);
+			//escolha[i] é os botões
 			
 		}
-		
+		//panel do JPanel
 		panel.setLayout(layoutDoJogo); //layoutDoJogo contém o grid
 		add(panel, BorderLayout.CENTER);
 		
@@ -67,6 +68,7 @@ public class JogoMemoria extends JInternalFrame{//colocar internalFrame
 		
 		//percorrendo as 16 possibilidades
 		for (int i=0; i<16; i++) {
+			//ação para cada botão
 			Escolha[i].addActionListener(handler);
 			
 		}
@@ -91,10 +93,11 @@ public class JogoMemoria extends JInternalFrame{//colocar internalFrame
 	
 	//implements = exporta comportamentos +++++++++++++++++++++
 	private class EventosJogoDaMemoria implements ActionListener{
+		
 		int contAcertos, primeiroClick, segundoClick;
 		int numeroClick, posi, cont, pontosAnterior, MaiorPontuacao;
-		
 		int partidasJogadas  = 0, numeroDeVitorias = 0;
+		
 		boolean novoJogo = true;
 		boolean reiniciar = false;
 		boolean fimDeJogo = false;
@@ -112,7 +115,7 @@ public class JogoMemoria extends JInternalFrame{//colocar internalFrame
 	                pontosAnterior = pontos;
 	                pontos = 100;
 	                numeroClick = 0;
-	                posi = 0; cont = 16;
+	                posi = 0; cont = 16;//importante
 	                primeiroClick = 0;
 	                segundoClick = 0;
 
@@ -132,11 +135,13 @@ public class JogoMemoria extends JInternalFrame{//colocar internalFrame
 	                    for (int i=0; i<8; ++i){
 	                    	//aqui percorre os pares
 	                        for (int j=0; j<2; ++j){
+	                        	//sorteia nas 16 posições
 	                            posi = randomNumber.nextInt(cont);//sorteando posição
-	                            Aleatorio[posicaoDoVetorAleatorio[posi]] = i;
+	                            Aleatorio[posicaoDoVetorAleatorio[posi]] = i;//sorteia os dois botões nas posições de botões
 	                            
-	                            //posição < contador
+	                            //posição < contador de 16 posições
 	                            if (posi < cont){
+	                            	
 	                                for (int q=(posi+1); q<(cont); ++q){
 	                                    posicaoDoVetorAleatorio[q-1] = posicaoDoVetorAleatorio[q];
 	                                    
@@ -162,17 +167,13 @@ public class JogoMemoria extends JInternalFrame{//colocar internalFrame
 						if (numeroClick == 1) primeiroClick = i;
 						if (numeroClick == 2) {
 							segundoClick = i;
+							//no caso de o usuário ERRAR
 							if (Aleatorio[primeiroClick] != Aleatorio[segundoClick]) {
 								pontos-=2; //diminuir a pontuação
 								JOptionPane.showMessageDialog(JogoMemoria.this, "Errado");
-								TelaDeErro teste = new TelaDeErro("VOCÊ ERROU!");
-								teste.Testando();
+								
 						
-									
-								
-									
-									
-								
+								//esconde botões clicados
 								Escolha[primeiroClick].setText("");
 								Escolha[segundoClick].setText("");
 								//enabled habilida edição do usuário, oculta botões caso errado
@@ -193,11 +194,20 @@ public class JogoMemoria extends JInternalFrame{//colocar internalFrame
 	            pontuacaoJogador.setText("Pontos: " + pontos);
 	            
 	            //se ganhar, 
-	            if (fimDeJogo == true) {
+//	            if (fimDeJogo == true) {
+//	            	//concertar aqui, não está dando mensagem de ganho
+//	        		
+//	            	JOptionPane.showMessageDialog(JogoMemoria.this,"Fim de jogo, você fez "+pontos+" pontos");
+//					fimDeJogo = false;
+//				}
+	            if (contAcertos== 8) {
 	            	//concertar aqui, não está dando mensagem de ganho
 	        		
 	            	JOptionPane.showMessageDialog(JogoMemoria.this,"Fim de jogo, você fez "+pontos+" pontos");
+	            	TelaDeErro teste = new TelaDeErro("Parabéns, Você Ganhou, Até mais!");
+					teste.Testando();
 					fimDeJogo = false;
+					
 				}
 		      	
 		}

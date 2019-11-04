@@ -1,6 +1,7 @@
 package tela;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -13,6 +14,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import tela.TelaDeErro;
 
 public class JogoMemoria extends JInternalFrame{//colocar internalFrame
 	int pontos = 100;
@@ -38,6 +40,7 @@ public class JogoMemoria extends JInternalFrame{//colocar internalFrame
 		for(int i=0; i<16; i++) {
 			
 			Escolha[i] = new JButton();
+			
 			//adicionando em Panel as escolhas com bts
 			panel.add(Escolha[i]);
 			Escolha[i].setFont(fonte);
@@ -48,12 +51,20 @@ public class JogoMemoria extends JInternalFrame{//colocar internalFrame
 		panel.setLayout(layoutDoJogo); //layoutDoJogo contém o grid
 		add(panel, BorderLayout.CENTER);
 		
+		
 		//barra de pontuacao
+		
 		barraStatus.add(pontuacaoJogador);
 		add(barraStatus, BorderLayout.SOUTH);
 		
+		
+		
+		
+ 
+		
 		//instanciando objeto +++++++++++++++++++++++++++++
 		EventosJogoDaMemoria handler = new EventosJogoDaMemoria();
+		
 		//percorrendo as 16 possibilidades
 		for (int i=0; i<16; i++) {
 			Escolha[i].addActionListener(handler);
@@ -62,10 +73,12 @@ public class JogoMemoria extends JInternalFrame{//colocar internalFrame
 		
 		//configurações de Janela
 		//this=referencia classe/objeto sendo executado no momento
+		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//para sair
 		this.setResizable(false); //não redimensionavel
 		this.setSize(500, 500);
 		this.setVisible(true);
+		
 //		this.setLocationRelativeTo(null);//para centralizar
 		
 		
@@ -110,16 +123,19 @@ public class JogoMemoria extends JInternalFrame{//colocar internalFrame
 	                }
 
 	                if (reiniciar == false){
-
+	                	//percorre botões com os números aleatórios
 	                    for (int i=0; i<16; ++i){
 	                        posicaoDoVetorAleatorio[i] = i;
 	                    }
-
+	                    //8 pares de botões
+	                    //laço de repetição para os botões que são 8 pares
 	                    for (int i=0; i<8; ++i){
+	                    	//aqui percorre os pares
 	                        for (int j=0; j<2; ++j){
-	                            posi = randomNumber.nextInt(cont);
+	                            posi = randomNumber.nextInt(cont);//sorteando posição
 	                            Aleatorio[posicaoDoVetorAleatorio[posi]] = i;
-
+	                            
+	                            //posição < contador
 	                            if (posi < cont){
 	                                for (int q=(posi+1); q<(cont); ++q){
 	                                    posicaoDoVetorAleatorio[q-1] = posicaoDoVetorAleatorio[q];
@@ -131,22 +147,35 @@ public class JogoMemoria extends JInternalFrame{//colocar internalFrame
 	                }
 	                novoJogo = false;
 	            }
+		      //percorre botões, no vetor
 		      for(int i =0; i<16; i++) {
-					if (event.getSource() == Escolha[i]) {
+		    	  	//mostrando escolja
+					if (event.getSource() == Escolha[i]) 
+					{	
+						//no click aparece o número
 						Escolha[i].setText(String.valueOf(Aleatorio[i]));
 						Escolha[i].setEnabled(false);
 						Escolha[i].setVisible(true);
 						numeroClick++;
+						//sobe o número de clicks
 						
 						if (numeroClick == 1) primeiroClick = i;
 						if (numeroClick == 2) {
 							segundoClick = i;
 							if (Aleatorio[primeiroClick] != Aleatorio[segundoClick]) {
-								pontos-=2;
+								pontos-=2; //diminuir a pontuação
 								JOptionPane.showMessageDialog(JogoMemoria.this, "Errado");
+								TelaDeErro teste = new TelaDeErro("VOCÊ ERROU!");
+								teste.Testando();
+						
+									
+								
+									
+									
+								
 								Escolha[primeiroClick].setText("");
 								Escolha[segundoClick].setText("");
-								//enabled habilida edição do usuário
+								//enabled habilida edição do usuário, oculta botões caso errado
 								Escolha[primeiroClick].setEnabled(true);
 								Escolha[segundoClick].setEnabled(true);
 
@@ -159,11 +188,14 @@ public class JogoMemoria extends JInternalFrame{//colocar internalFrame
 								
 					}
 				}
+		      //seta os pontos
 	            if (pontos < 0) pontos = 0;
 	            pontuacaoJogador.setText("Pontos: " + pontos);
 	            
+	            //se ganhar, 
 	            if (fimDeJogo == true) {
 	            	//concertar aqui, não está dando mensagem de ganho
+	        		
 	            	JOptionPane.showMessageDialog(JogoMemoria.this,"Fim de jogo, você fez "+pontos+" pontos");
 					fimDeJogo = false;
 				}

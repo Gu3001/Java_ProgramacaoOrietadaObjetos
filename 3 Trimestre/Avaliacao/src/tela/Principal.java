@@ -24,6 +24,7 @@ public class Principal extends JFrame implements ActionListener{
 	
 
 	public Principal() {
+		
 		setSize(800, 600);
 		setJMenuBar(jmb);
 		

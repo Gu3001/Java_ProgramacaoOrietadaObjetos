@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -36,11 +37,15 @@ public class JogoDaMemoria extends JInternalFrame {
 		
 	}
 	public void configurarJanela() {
+//		JFrame frame = new JFrame("Test Frame");
+		
 		setTitle("Jogo da Memória");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(800,800);
 //		setLocationRelativeTo(null);
 		setVisible(true);
+		
+		
 	}
 	public void configurarTela() {
 		add(BorderLayout.CENTER,tela); //adicionando no centro, tela
@@ -84,6 +89,7 @@ public class JogoDaMemoria extends JInternalFrame {
 //				botoes[i].setText("Java");
 //			}else {
 //				botoes[i].setText("Python");
+			
 //			}
 			
 		}
@@ -145,6 +151,7 @@ public class JogoDaMemoria extends JInternalFrame {
 	public class Botao extends JButton{
 		public Botao() {
 			setBackground(Color.WHITE);
+			
 		}
 
 	}

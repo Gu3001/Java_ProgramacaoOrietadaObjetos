@@ -14,7 +14,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import tela.TelaDeErro;
+import tela.TelaFinal;
 
 public class JogoMemoria extends JInternalFrame{//colocar internalFrame
 	int pontos = 100;
@@ -25,11 +25,12 @@ public class JogoMemoria extends JInternalFrame{//colocar internalFrame
 	//Barra de ferramenta
 	private JPanel panel = new JPanel(); //defninil JPanel
 	private GridLayout layoutDoJogo = new GridLayout(4,4);
-	private Font fonte = new Font("Lucida Console", Font.BOLD, 36);
+	
 	private JButton Escolha[] = new JButton[16]; //definindo botões para lista de escolhas
 	
     private JPanel barraStatus = new JPanel(); //onde vai ficar a pontuação
 	private JLabel pontuacaoJogador = new JLabel("Pontos: 100"); 
+	SistemaDePontuacao sist = new SistemaDePontuacao();
 	
 	//criação do Contrutror
 	public JogoMemoria() {
@@ -39,12 +40,15 @@ public class JogoMemoria extends JInternalFrame{//colocar internalFrame
 		//vai percorrer todas as 16 possibilidades
 		for(int i=0; i<16; i++) {
 			
-			Escolha[i] = new JButton();
+			//instanciando objeto botão de outra classe
+			BotaoPersonalizado btn = new BotaoPersonalizado();
+			btn.botao();
+			Escolha[i] = btn.botao();
+			
 			
 			//adicionando em Panel as escolhas com bts
 			panel.add(Escolha[i]);
-			Escolha[i].setFont(fonte);
-			Escolha[i].setVisible(true);
+			
 			//escolha[i] é os botões
 			
 		}
@@ -95,7 +99,7 @@ public class JogoMemoria extends JInternalFrame{//colocar internalFrame
 	private class EventosJogoDaMemoria implements ActionListener{
 		
 		int contAcertos, primeiroClick, segundoClick;
-		int numeroClick, posi, cont, pontosAnterior, MaiorPontuacao;
+		int numeroClick, posi, cont, pontosAnterior;
 		int partidasJogadas  = 0, numeroDeVitorias = 0;
 		
 		boolean novoJogo = true;
@@ -154,7 +158,7 @@ public class JogoMemoria extends JInternalFrame{//colocar internalFrame
 	            }
 		      //percorre botões, no vetor
 		      for(int i =0; i<16; i++) {
-		    	  	//mostrando escolja
+		    	  	//mostrando escolha
 					if (event.getSource() == Escolha[i]) 
 					{	
 						//no click aparece o número
@@ -169,7 +173,8 @@ public class JogoMemoria extends JInternalFrame{//colocar internalFrame
 							segundoClick = i;
 							//no caso de o usuário ERRAR
 							if (Aleatorio[primeiroClick] != Aleatorio[segundoClick]) {
-								pontos-=2; //diminuir a pontuação
+//								pontos-=2; //diminuir a pontuação
+								sist.contagemMenos();
 								JOptionPane.showMessageDialog(JogoMemoria.this, "Errado");
 								
 						
@@ -181,8 +186,9 @@ public class JogoMemoria extends JInternalFrame{//colocar internalFrame
 								Escolha[segundoClick].setEnabled(true);
 
 							} else {
+								sist.contagemMais();
 								contAcertos ++;
-								pontos+=10;
+//								pontos+=10;
 							}
 							numeroClick = 0;
 						}
@@ -190,21 +196,16 @@ public class JogoMemoria extends JInternalFrame{//colocar internalFrame
 					}
 				}
 		      //seta os pontos
-	            if (pontos < 0) pontos = 0;
-	            pontuacaoJogador.setText("Pontos: " + pontos);
+		      	
+		      //------------------------comunicação com sistema de pontuação
+	            pontuacaoJogador.setText("Pontos: " + sist.resultadoFinal());
 	            
-	            //se ganhar, 
-//	            if (fimDeJogo == true) {
-//	            	//concertar aqui, não está dando mensagem de ganho
-//	        		
-//	            	JOptionPane.showMessageDialog(JogoMemoria.this,"Fim de jogo, você fez "+pontos+" pontos");
-//					fimDeJogo = false;
-//				}
+
 	            if (contAcertos== 8) {
 	            	//concertar aqui, não está dando mensagem de ganho
 	        		
-	            	JOptionPane.showMessageDialog(JogoMemoria.this,"Fim de jogo, você fez "+pontos+" pontos");
-	            	TelaDeErro teste = new TelaDeErro("Parabéns, Você Ganhou, Até mais!");
+	            	JOptionPane.showMessageDialog(JogoMemoria.this,"Fim de jogo, você fez "+sist.resultadoFinal()+" pontos");
+	            	TelaFinal teste = new TelaFinal("Parabéns, Você Ganhou, Até mais!");
 					teste.Testando();
 					fimDeJogo = false;
 					

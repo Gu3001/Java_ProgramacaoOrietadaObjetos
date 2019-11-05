@@ -8,13 +8,13 @@ import java.util.TimerTask;
 
 import javax.swing.JFrame;
 
-public class TelaDeErro extends JPanel implements Runnable
+public class TelaFinal extends JPanel implements Runnable
 {
 private String text;
 private float posicaoX;
 private float posicaoY;
 
-public TelaDeErro(String inText)
+public TelaFinal(String inText)
 {
 	text = inText;
 	posicaoX = 25.0f;
@@ -46,8 +46,8 @@ public void run()
 }
 
 public void Testando(){
-	JFrame janela = new JFrame("Tela de Erro");
-	TelaDeErro panel = new TelaDeErro("Parabéns, Você Ganhou, Até mais!");
+	JFrame janela = new JFrame("Fim de Jogo");
+	TelaFinal panel = new TelaFinal("Parabéns, Você Ganhou, Até mais!");
 	
 	janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	janela.getContentPane().add(panel);

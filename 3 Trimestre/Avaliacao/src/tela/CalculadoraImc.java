@@ -60,31 +60,22 @@ public class CalculadoraImc extends JInternalFrame{
  
                 double peso = Double.parseDouble(edtPeso.getText());
                 double altura= Double.parseDouble(edtAltura.getText());
-                double imc = peso / Math.pow(altura, 2);
+                
+                CalcularImc calc = new CalcularImc();
+                double imc = calc.imcCalculo(peso, altura);
+
  
                 //objeto para formatar saida, com uma decimal
                 DecimalFormat df = new DecimalFormat("#0.0");
  
                 String resultado="Resultado: "+df.format(imc);
+                
+                Valores vo = new Valores();
+                String classif = vo.calcular(imc);
+                
                  
                 //abaixo comparo valor do imc e concatena a string resultado
-                if(imc < 18.5){
-                    resultado+=" Abaixo do peso";
-                }
-                else if(imc < 24.9){
-                    resultado+=" Peso ideal";
-                }
-                else if(imc < 29.9){
-                    resultado+=" Levemente acima do peso";
-                }
-                else if(imc < 34.9){
-                    resultado+=" Primeiro grau de obesidade";
-                }
-                else if(imc < 39.9){
-                    resultado+=" Segundo grau de obesidade";
-                }
-                else
-                    resultado+=" Obesidade m�rbida";
+                resultado+=classif;
  
                 lblResultado.setText(resultado);
  

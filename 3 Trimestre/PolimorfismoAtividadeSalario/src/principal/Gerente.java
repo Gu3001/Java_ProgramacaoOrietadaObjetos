@@ -1,6 +1,6 @@
 package principal;
 
-public class Gerente extends Funcionario{
+public class Gerente extends Funcionario implements Salario{
 	private int qtdeFuncionario;
 
 	public int getQtdeFuncionario() {
@@ -11,8 +11,9 @@ public class Gerente extends Funcionario{
 		this.qtdeFuncionario = qtdeFuncionario;
 	}
 	
-
-	public double CalcularBonus() {
+	@Override
+	public double calcularBonus() {
+		System.out.println("Calculando Bônus de Gerente");
 		
 		double total = salario * horasTrabalhadas;
 		if (total > 2.001) {

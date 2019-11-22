@@ -1,6 +1,6 @@
 package principal;
 
-public class Funcionario{
+public class Funcionario implements Salario{
 	protected double salario;
 	protected int horasTrabalhadas;
 	protected double totalAdiantamento;
@@ -23,9 +23,13 @@ public class Funcionario{
 	public void setTotalAdiantamento(double totalAdiantamento) {
 		this.totalAdiantamento = totalAdiantamento;
 	}
+
 	
-public double CalcularBonus() {
-		
+	
+
+	@Override
+	public double calcularBonus() {
+		System.out.println("Calculando Bônus de Funcionario");
 		Funcionario funcionario = new Funcionario();
 		double salario = funcionario.getSalario();
 		double horasTrabalhadas = funcionario.getHorasTrabalhadas();
@@ -41,10 +45,10 @@ public double CalcularBonus() {
 			total *=1.01;
 		}
 		return total;
-		
 	}
-	public double DefinirDesconto() {
-		
+	@Override
+	public double definirDesconto() {
+		System.out.println("Calculando Desconto de Funcionario");
 		if (totalAdiantamento > 501) {
 			return totalAdiantamento * 1.05;
 		}else if(totalAdiantamento > 301) {
@@ -55,9 +59,10 @@ public double CalcularBonus() {
 			return totalAdiantamento * 1.01;
 		}
 	}
-	
-	public double CalcularSalarioFinal() {
-		return CalcularBonus() - DefinirDesconto();
+	@Override
+	public double calcularSalarioFinal() {
+		System.out.println("Calculando Salário Final de Funcionario");
+		return calcularBonus() - definirDesconto();
 	}
 	
 }

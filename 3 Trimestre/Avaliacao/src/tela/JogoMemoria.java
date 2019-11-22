@@ -42,8 +42,8 @@ public class JogoMemoria extends JInternalFrame{//colocar internalFrame
 			
 			//instanciando objeto botão de outra classe
 			BotaoPersonalizado btn = new BotaoPersonalizado();
-			btn.botao();
-			Escolha[i] = btn.botao();
+			
+			Escolha[i] = btn;
 			
 			
 			//adicionando em Panel as escolhas com bts

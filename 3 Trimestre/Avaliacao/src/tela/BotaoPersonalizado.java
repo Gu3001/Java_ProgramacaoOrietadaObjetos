@@ -6,16 +6,15 @@ import java.awt.Font;
 import javax.swing.JButton;
 
 
-public class BotaoPersonalizado {
+public class BotaoPersonalizado extends JButton {
 	private Font fonte = new Font("Lucida Console", Font.BOLD, 36);
 	
-	public JButton botao() {
+	public BotaoPersonalizado() {
 		
-		JButton botao = new JButton();
-		botao.setBackground(Color.white);
-		botao.setFont(fonte);
-		botao.setVisible(true);
-		return botao;
+//		JButton botao = new JButton();
+	    setBackground(Color.white);
+		setFont(fonte);
+		setVisible(true);
 		
 		
 	}
